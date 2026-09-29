@@ -1,0 +1,22 @@
+main=https://raw.githubusercontent.com/vntuhu/ytbdl/main
+home=/data/data/com.termux/files/home
+bin=/data/data/com.termux/files/usr/bin
+
+# update
+rm -r $bin/updt
+wget $main/updt -P $bin/
+chmod +x $bin/updt
+
+# termux-url-opener
+rm -r $home/bin/termux-url-opener
+wget $main/termux-url-opener -P $home/bin
+chmod +x $home/bin/termux-url-opener
+
+# yt-dlp config
+rm -r $home/yt-dlp.conf
+wget $main/yt-dlp.conf -P $home
+
+# update yt-dlp
+yt-dlp -U
+termux-fix-shebang $PREFIX/bin/yt-dlp
+echo "Done..."
