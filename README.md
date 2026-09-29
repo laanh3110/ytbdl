@@ -10,7 +10,7 @@ Lệnh cài đặt:
 pkg upgrade -y
 ```
 ```
-curl -s -L https://raw.githubusercontent.com/vntuhu/ytbdl/main/install.sh | bash
+curl -s -L https://raw.githubusercontent.com/laanh3110/ytbdl/main/install.sh | bash
 ```
 
 Mọi thông tin về yt-dlp:
