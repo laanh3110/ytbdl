@@ -1,4 +1,4 @@
-main=https://raw.githubusercontent.com/vntuhu/ytbdl/main
+main=https://raw.githubusercontent.com/laanh3110/ytbdl/main
 home=/data/data/com.termux/files/home
 bin=/data/data/com.termux/files/usr/bin
 
