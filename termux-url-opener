@@ -1,10 +1,11 @@
-main=https://raw.githubusercontent.com/vntuhu/ytbdl/main
+main=https://raw.githubusercontent.com/laanh3110/ytbdl/main
 home=/data/data/com.termux/files/home
 bin=/data/data/com.termux/files/usr/bin
 sdc=/data/data/com.termux/files/home/storage/shared
 url=$1
 echo "1) MP4/MKV-video"
 echo "2) M4A/MP3-audio"
+echo "3) MP4/MKV-video cookies"
 echo "x) Exit"
 read CHOICE
 case $CHOICE in
@@ -12,6 +13,8 @@ case $CHOICE in
 yt-dlp $url;;
 2)
 yt-dlp -f 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio' -o "$sdc/ytdlp/%(title)s.%(ext)s" $url;;
+3)
+yt-dlp --cookies ~/storage/shared/ytdlp/cookies.txt $url;;
 x)
 exit;;
 video)
