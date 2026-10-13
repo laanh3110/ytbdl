@@ -1,20 +1,31 @@
-main=https://raw.githubusercontent.com/laanh3110/ytbdl/main
+Main=https://raw.githubusercontent.com/laanh3110/ytbdl/main
 home=/data/data/com.termux/files/home
 bin=/data/data/com.termux/files/usr/bin
 sdc=/data/data/com.termux/files/home/storage/shared
 url=$1
+
+# 1. Hỏi nhập số tập hoặc tên tùy chỉnh trước khi hiện menu
+read -p "Nhập số tập / tên tùy chỉnh (Bỏ trống nếu giữ nguyên): " TAP
+
+if [ -z "$TAP" ]; then
+    PREFIX=""
+else
+    PREFIX="Tap $TAP - "
+fi
+
 echo "1) MP4/MKV-video"
 echo "2) M4A/MP3-audio"
 echo "3) MP4/MKV-video cookies"
 echo "x) Exit"
 read CHOICE
+
 case $CHOICE in
 1)
-yt-dlp $url;;
+yt-dlp -o "$sdc/ytdlp/${PREFIX}%(title)s [%(id)s].%(ext)s" $url;;
 2)
-yt-dlp -f 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio' -o "$sdc/ytdlp/%(title)s.%(ext)s" $url;;
+yt-dlp -f 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio' -o "$sdc/ytdlp/${PREFIX}%(title)s [%(id)s].%(ext)s" $url;;
 3)
-yt-dlp --cookies ~/storage/shared/ytdlp/cookies.txt $url;;
+yt-dlp -o "$sdc/ytdlp/${PREFIX}%(title)s [%(id)s].%(ext)s" --cookies ~/storage/shared/ytdlp/cookies.txt $url;;
 x)
 exit;;
 video)
@@ -22,11 +33,11 @@ clear
 rm -r $home/bin/termux-url-opener
 wget $main/videoonly/termux-url-opener -P $home/bin
 chmod +x $home/bin/termux-url-opener
-yt-dlp $url;;
+yt-dlp -o "$sdc/ytdlp/${PREFIX}%(title)s [%(id)s].%(ext)s" $url;;
 audio)
 clear
 rm -r $home/bin/termux-url-opener
 wget $main/audioonly/termux-url-opener -P $home/bin
 chmod +x $home/bin/termux-url-opener
-yt-dlp -f 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio' -o "$sdc/ytdlp/%(title)s.%(ext)s" --sponsorblock-remove all $url;;
+yt-dlp -f 'bestaudio[ext=m4a]/bestaudio[ext=mp3]/bestaudio' -o "$sdc/ytdlp/${PREFIX}%(title)s [%(id)s].%(ext)s" --sponsorblock-remove all $url;;
 esac
